@@ -196,21 +196,21 @@
         exrLoader.load(
             'assets/mario_bg.exr',
             function (texture) {
+                // Convert to half-float
+                texture.encoding = THREE.sRGBEncoding; // Set encoding if needed
+                texture.type = THREE.HalfFloatType; // Use half-float type
+
                 const envMap = pmremGenerator.fromEquirectangular(texture).texture;
                 scene.environment = envMap;
                 scene.background = envMap;
                 
                 // Create a rotation matrix to adjust the environment map orientation
                 const rotationMatrix = new THREE.Matrix4();
-                // Rotate around Y axis (left/right)
                 const yRotation = Math.PI * 0.5; // 90 degrees - adjust this value
-                // Rotate around X axis (up/down)
                 const xRotation = Math.PI * 0.1; // slight tilt - adjust this value
-                // Rotate around Z axis (roll)
-                const zRotation = 0; // adjust if needed
                 
                 rotationMatrix.makeRotationFromEuler(
-                    new THREE.Euler(xRotation, yRotation, zRotation)
+                    new THREE.Euler(xRotation, yRotation, 0)
                 );
                 
                 // Apply rotation to environment map
@@ -231,7 +231,6 @@
                 console.error('Error loading EXR file:', error);
                 // Set fallback background color or texture
                 document.body.style.backgroundColor = '#82C8E5'; // Fallback color
-                // Optionally, load a different texture here
             }
         );
 
