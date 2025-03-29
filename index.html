@@ -169,7 +169,7 @@
         // Set up scene
         const scene = new THREE.Scene();
         // Set default background color (will be visible even before/if EXR fails to load)
-        scene.background = new THREE.Color(0x87CEEB); // Light blue color
+        scene.background = new THREE.Color(0xafd5da); // Light blue color
 
         const container = document.getElementById('model-container');
         const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
@@ -179,7 +179,7 @@
         });
         
         // Set renderer background to match scene
-        renderer.setClearColor(0x87CEEB, 1);
+        renderer.setClearColor(0xffffff, 1);
         
         // Enable tone mapping and correct color space
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
