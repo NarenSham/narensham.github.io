@@ -36,19 +36,61 @@
             justify-content: center;
             background-color: transparent;
         }
+
+        nav {
+            position: fixed; /* Fix the navbar to the top */
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.8); /* Translucent background */
+            backdrop-filter: blur(10px); /* Optional: adds a blur effect */
+            z-index: 1000; /* Ensure it stays above other content */
+            transition: background 0.3s; /* Smooth transition for background */
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-around; /* Space out the links */
+        }
+
+        nav a {
+            text-decoration: none;
+            color: black; /* Default link color */
+            padding: 1rem; /* Add some padding */
+            transition: color 0.3s; /* Smooth transition for color */
+        }
+
+        nav a.active {
+            color: #007BFF; /* Highlight color for active link */
+            font-weight: bold; /* Make active link bold */
+        }
+
+        /* Add some margin to the body to prevent content from being hidden behind the navbar */
+        body {
+            margin-top: 60px; /* Adjust based on navbar height */
+        }
     </style>
 </head>
 <body>
     <!-- Add loading overlay -->
     <div id="loading-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.9); display: flex; align-items: center; justify-content: center; font-size: 2rem; z-index: 9999;">
-        Loading... <span id="countdown" style="color: lightgrey; font-family: 'Arial Narrow', sans-serif; font-weight: 300; font-size: 2rem;">5</span>
+        <span style="color: lightgrey; font-family: 'Arial Narrow', sans-serif; font-weight: normal; font-size: 2rem;">Loading...</span>
+        <span id="countdown" style="color: lightgrey; font-family: 'Arial Narrow', sans-serif; font-weight: normal; font-size: 2rem;">5</span>
     </div>
     <nav>
         <div class="container">
             <div class="logo">
                 <a href="/">NAREN</a>
             </div>
-            <ul>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul id="nav-links">
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#experience">Experience</a></li>
@@ -61,11 +103,12 @@
     <div class="container">
         <main>
             <section class="hero">
-                <!-- Add wrapper div around model container -->
                 <div class="model-wrapper">
                     <div id="model-container"></div>
                 </div>
-                <h2>Hello, I'm Naren. I'm a former Management Consultant and Data Expert based in [Your Location]. I'm currently specializing in Supply Chain and Business Operations.</h2>
+                <div class="text-container">
+                    <h2>Hello, I'm Naren.<br>I'm a <span class="dynamic-text"></span></h2>
+                </div>
                 <div class="social-links">
                     <a href="https://github.com/NarenSham" class="button">GitHub</a>
                     <a href="https://www.linkedin.com/in/narensham/" class="button">LinkedIn</a>
@@ -217,7 +260,7 @@
         // Load GLB model
         const loader = new THREE.GLTFLoader();
         loader.load(
-            'assets/bustted.glb',
+            'assets/bust_ted3.glb',
             function (gltf) {
                 model = gltf.scene;
                 model.scale.set(2, 2, 2);
@@ -294,47 +337,108 @@
     </script>
     <!-- Add this right before </body> -->
     <script>
-        // Handle smooth scrolling
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        const body = document.body;
+
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('show');
+            body.classList.toggle('menu-open');
+        }
+
+        function closeMenu() {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('show');
+            body.classList.remove('menu-open');
+        }
+
+        // Toggle menu on hamburger click
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMenu();
+        });
+
+        // Close menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (e) => {
                 e.preventDefault();
-                const targetId = this.getAttribute('href');
-                document.querySelector(targetId).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = e.target.getAttribute('href');
+                
+                closeMenu();
+                
+                // Small delay before scrolling to section
+                setTimeout(() => {
+                    document.querySelector(target).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }, 300);
             });
         });
 
-        // Handle section highlighting
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('nav a');
-
-        const observerOptions = {
-            root: null,
-            rootMargin: '-20% 0px -60% 0px', // Adjust these values to control when the highlight triggers
-            threshold: 0
-        };
-
-        const observerCallback = (entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Remove active class from all nav links
-                    navLinks.forEach(link => link.classList.remove('active'));
-                    
-                    // Add active class to the corresponding nav link
-                    const activeLink = document.querySelector(`nav a[href="#${entry.target.id}"]`);
-                    if (activeLink) {
-                        activeLink.classList.add('active');
-                    }
-                }
-            });
-        };
-
-        const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-        sections.forEach(section => {
-            observer.observe(section);
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (navLinks.classList.contains('show') && 
+                !e.target.closest('nav') && 
+                !e.target.closest('.hamburger')) {
+                closeMenu();
+            }
         });
+
+        // Close menu on resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                closeMenu();
+            }
+        });
+    </script>
+    <!-- Add this script before the closing body tag -->
+    <script>
+        const roles = [
+            "former Management Consultant",
+            "Data Expert",
+            "Supply Chain Specialist",
+            "Business Operations Expert",
+            "Problem Solver"
+        ];
+
+        const dynamicText = document.querySelector('.dynamic-text');
+        let currentIndex = 0;
+        let isDeleting = false;
+        let currentText = '';
+        let typingSpeed = 50; // Speed of typing in milliseconds
+
+        function typeText() {
+            const fullText = roles[currentIndex];
+
+            if (isDeleting) {
+                // Remove characters
+                currentText = fullText.substring(0, currentText.length - 1);
+                typingSpeed = 30; // Faster when deleting
+            } else {
+                // Add characters
+                currentText = fullText.substring(0, currentText.length + 1);
+                typingSpeed = 50; // Normal speed when typing
+            }
+
+            dynamicText.textContent = currentText;
+
+            if (!isDeleting && currentText === fullText) {
+                // Start deleting after a pause
+                isDeleting = true;
+                typingSpeed = 2000; // Wait before starting to delete
+            } else if (isDeleting && currentText === '') {
+                // Move to next text
+                isDeleting = false;
+                currentIndex = (currentIndex + 1) % roles.length;
+                typingSpeed = 500; // Pause before typing next word
+            }
+
+            setTimeout(typeText, typingSpeed);
+        }
+
+        // Start the typing animation
+        typeText();
     </script>
 </body>
 </html> 
