@@ -168,17 +168,18 @@
 
         // Set up scene
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0xffffff);
+        // Set default background color (will be visible even before/if EXR fails to load)
+        scene.background = new THREE.Color(0x87CEEB); // Light blue color
 
         const container = document.getElementById('model-container');
         const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ 
             antialias: true,
-            alpha: false
+            alpha: true  // Enable alpha
         });
         
-        // Set renderer background to white as well
-        renderer.setClearColor(0xffffff, 1);
+        // Set renderer background to match scene
+        renderer.setClearColor(0x87CEEB, 1);
         
         // Enable tone mapping and correct color space
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -198,7 +199,10 @@
             function (texture) {
                 const envMap = pmremGenerator.fromEquirectangular(texture).texture;
                 scene.environment = envMap;
-                scene.background = envMap;
+                // Only set background if EXR loads successfully
+                if (!/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                    scene.background = envMap;
+                }
                 
                 // Create a rotation matrix to adjust the environment map orientation
                 const rotationMatrix = new THREE.Matrix4();
@@ -229,9 +233,8 @@
             },
             function (error) {
                 console.error('Error loading EXR file:', error);
-                // Set a fallback background color
-                scene.background = new THREE.Color(0x87CEEB); // Light blue color as fallback
-                document.getElementById('loading-overlay').style.display = 'none'; // Hide loading overlay
+                // Background is already set to light blue, so we just need to hide the loading overlay
+                document.getElementById('loading-overlay').style.display = 'none';
             }
         );
 
