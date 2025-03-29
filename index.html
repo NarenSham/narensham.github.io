@@ -1,164 +1,340 @@
 <!DOCTYPE html>
-<html lang="en-US">
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naren Sham | Portfolio</title>
+    <link href="styles/main.css" rel="stylesheet">
+    <!-- Add Inter font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Add Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Add fflate for EXR support -->
+    <script src="https://cdn.jsdelivr.net/npm/fflate@0.7.4/umd/index.min.js"></script>
+    <!-- Add GLTFLoader for loading GLB files -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <!-- Add EXR loader -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/EXRLoader.js"></script>
+    <!-- Add OrbitControls -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <style>
+        #model-container {
+            width: 100% !important; /* Changed from 100vw to 100% */
+            height: 60vh !important;
+            max-width: 1200px !important; /* Add max-width */
+            margin: 0 auto !important; /* Center the container */
+            position: relative;
+            overflow: hidden;
+            padding: 0 2rem !important; /* Add padding on sides */
+            box-sizing: border-box !important; /* Ensure padding is included in width */
+        }
 
-<!-- Meta Tags -->
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-<meta name="description" content=""/>
-<title>Naren Sham</title>
-
-<!-- Mobile Specifics -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="HandheldFriendly" content="true"/>
-<meta name="MobileOptimized" content="320"/>
-<meta http-equiv='cache-control' content='no-cache'>
-<meta http-equiv='expires' content='0'>
-<meta http-equiv='pragma' content='no-cache'>
-
-<!-- Bootstrap -->
-<link href="assets/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Main Style -->
-<link href="assets/css/main.css" rel="stylesheet">
-
-<!-- Responsive -->
-<link href="assets/css/responsive.css" rel="stylesheet">
-
-<!-- Google Font -->
-<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&amp;subset=latin,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
-
-<!-- Fav Icon -->
-<link rel="shortcut icon" href="#">
-
-<link rel="apple-touch-icon" href="#">
-<link rel="apple-touch-icon" sizes="114x114" href="#">
-<link rel="apple-touch-icon" sizes="72x72" href="#">
-<link rel="apple-touch-icon" sizes="144x144" href="#">
-
-<!-- Modernizr -->
-<script src="assets/js/modernizr.js"></script>
-
+        /* Add a wrapper div style to help with centering */
+        .model-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            background-color: transparent;
+        }
+    </style>
 </head>
-
-
 <body>
-
-<!-- Header -->
-<header>
-	<div class="container">
-    	<div class="row">
-        	<div class="span2">
-            	<div id="logo">
-        			<a href="index.html" title="Naren Sham">NAREN</a>
-        		</div>
+    <!-- Add loading overlay -->
+    <div id="loading-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.9); display: flex; align-items: center; justify-content: center; font-size: 2rem; z-index: 9999;">
+        Loading... <span id="countdown" style="color: lightgrey; font-family: 'Arial Narrow', sans-serif; font-weight: 300; font-size: 2rem;">5</span>
+    </div>
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <a href="/">NAREN</a>
             </div>
-            <div class="span10">
-        		<nav id="menu">
-                    <ul id="menu-nav">
-                        <li><a href="about.html">about</a></li>
-                        <li><a href="contact.html">contact</a></li>
-                    </ul>
-                </nav>
-        	</div>
-        </div>
-    </div>
-</header>
-<!-- End Header -->
-
-<!-- Start Intro Box -->
-<section id="intro-box" class="margin-0">
-	<div class="container">
-        <div class="row">
-            <div class="span12">
-                <h3 class="center"> Former Management Consultant. Data Expert. Supply Chain Knowledge. Business Operations & Product Operations Management Aspirant. Coder </h3>
-            </div> 
-        </div>
-    </div>
-</section>
-<!-- End Intro Box -->
-
-
-
-<!-- Start Section Portfolio Projects -->
-<section id="portfolio" class="container">
-    <div class="row">
-        <div id="portfolio-projects">
-            <ul id="projects">
-                <li class="item-project span12">
-                    <a href="work.html" title="Work4"><img src="assets/img/home3.jpg" alt=""></a>
-                </li>
-                <br>
-                <br>
+            <ul>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
-    </div>
-</section>
-                <!-- Start Intro Box -->
-                <section id="intro-box2" class="margin-0">
-                    <div class="container">
-                        <div class="row">
-                            <div class="span12">
-                                <br>
-                                <br>
-                                <br>
-                                <h1 class="left"> Areas of Expertise </h1>
-                                <br>
-                                <h4 class="container"> ⚪ Business Strategy & Operations </h4>
-                                <h4 class="container"> ⚪ Retail Supply Chain cost savings opportunities </h4>
-                                <h4 class="container"> ⚪ Decision Support Systems </h4>
-                                <h4 class="container"> ⚪ Agile Project / Program Management </h4>
-                                <br>
-                                <br>
-                                <br>
+    </nav>
 
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <br>
-                <br>
-
-<section id="portfolio" class="container">
-    <div class="row">
-        <div id="portfolio-projects">
-            <ul id="projects">
-                <!-- End Intro Box -->
-                <li class="item-project span2">
-                    <a href="work.html" title="Work2"><img src="assets/img/home2.jpg" alt=""></a>
-                </li>
-                <li class="item-project span2">
-                    <a href="work.html" title="Work3"><img src="assets/img/home4.jpg" alt=""></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</section>
-<!-- End Section Portfolio Projects -->
-
-
-
-
-<!-- Start Footer -->
-<footer class="footer-widgets">
-	<div class="container">
-    	<div class="row">
-         	<div class="span4 widget">
-            	<div class="about-widget">
-                    <h7>emailnarensham@email.com</h7>
+    <div class="container">
+        <main>
+            <section class="hero">
+                <!-- Add wrapper div around model container -->
+                <div class="model-wrapper">
+                    <div id="model-container"></div>
                 </div>
-            </div>
-             <div class="span8 widget">
-            	<div class="twitter-widget">
-                		<h7><a href="#" target="_blank">facebook</a> &nbsp; • &nbsp; <a href="#" target="_blank">instagram</a> &nbsp; • &nbsp; <a href="https://www.linkedin.com/in/narensham/" >linkedin</a> &nbsp; • &nbsp; <a href="https://github.com/NarenSham">github</a>
-                </div>	
-            </div>
-        </div>
-    </div>
-</footer>
-<!-- End Footer -->
+                <h2>Hello, I'm Naren. I'm a former Management Consultant and Data Expert based in [Your Location]. I'm currently specializing in Supply Chain and Business Operations.</h2>
+                <div class="social-links">
+                    <a href="https://github.com/NarenSham" class="button">GitHub</a>
+                    <a href="https://www.linkedin.com/in/narensham/" class="button">LinkedIn</a>
+                </div>
+            </section>
 
+            <section id="projects">
+                <h2>My projects</h2>
+                <div class="projects-grid">
+                    <!-- Project cards will go here -->
+                </div>
+            </section>
+
+            <section id="skills">
+                <h2>My Skills</h2>
+                <div class="skills-grid">
+                    <!-- Add your skills here -->
+                </div>
+            </section>
+
+            <section id="experience">
+                <h2>My experience</h2>
+                <!-- Add your experience here -->
+            </section>
+
+            <section id="education">
+                <h2>My Education</h2>
+                <!-- Add your education here -->
+            </section>
+
+            <section id="contact">
+                <h2>Contact me</h2>
+                <p>Please contact me directly at [your-email] or through this form.</p>
+                <form class="contact-form">
+                    <input type="email" placeholder="Email" required>
+                    <textarea placeholder="Message" required></textarea>
+                    <button type="submit" class="button">Submit</button>
+                </form>
+            </section>
+        </main>
+    </div>
+    <!-- Add Three.js initialization script -->
+    <script>
+        // Countdown timer
+        let countdownTime = 5; // Set countdown time in seconds
+        const countdownElement = document.getElementById('countdown');
+
+        const countdownInterval = setInterval(() => {
+            countdownTime--;
+            countdownElement.textContent = countdownTime;
+
+            if (countdownTime <= 0) {
+                clearInterval(countdownInterval);
+                document.getElementById('loading-overlay').style.display = 'none'; // Hide loading overlay
+            }
+        }, 1000);
+
+        // Set up scene
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xffffff);
+
+        const container = document.getElementById('model-container');
+        const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ 
+            antialias: true,
+            alpha: false
+        });
+        
+        // Set renderer background to white as well
+        renderer.setClearColor(0xffffff, 1);
+        
+        // Enable tone mapping and correct color space
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1;
+        renderer.outputEncoding = THREE.sRGBEncoding;
+        
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        container.appendChild(renderer.domElement);
+
+        // Load environment map
+        const pmremGenerator = new THREE.PMREMGenerator(renderer);
+        pmremGenerator.compileEquirectangularShader();
+
+        const exrLoader = new THREE.EXRLoader();
+        exrLoader.load(
+            'assets/mario_bg.exr',
+            function (texture) {
+                const envMap = pmremGenerator.fromEquirectangular(texture).texture;
+                scene.environment = envMap;
+                scene.background = envMap;
+                
+                // Create a rotation matrix to adjust the environment map orientation
+                const rotationMatrix = new THREE.Matrix4();
+                // Rotate around Y axis (left/right)
+                const yRotation = Math.PI * 0.5; // 90 degrees - adjust this value
+                // Rotate around X axis (up/down)
+                const xRotation = Math.PI * 0.1; // slight tilt - adjust this value
+                // Rotate around Z axis (roll)
+                const zRotation = 0; // adjust if needed
+                
+                rotationMatrix.makeRotationFromEuler(
+                    new THREE.Euler(xRotation, yRotation, zRotation)
+                );
+                
+                // Apply rotation to environment map
+                envMap.matrix = rotationMatrix;
+                envMap.matrixAutoUpdate = false;
+                
+                texture.dispose();
+                pmremGenerator.dispose();
+                
+                console.log('EXR file loaded successfully');
+                // Hide loading overlay when the background is loaded
+                document.getElementById('loading-overlay').style.display = 'none';
+            },
+            function (progress) {
+                console.log('Loading EXR:', (progress.loaded / progress.total * 100) + '%');
+            },
+            function (error) {
+                console.error('Error loading EXR file:', error);
+            }
+        );
+
+        // Add lights with reduced intensity
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+        scene.add(ambientLight);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.3); // Further reduced
+        directionalLight.position.set(0, 1, 2);
+        scene.add(directionalLight);
+        
+        // Position camera - updating the initial position
+        camera.position.set(0, 0, 8);  // Changed from 5 to 8 to zoom out
+        camera.lookAt(0, 0, 0);
+
+        // Modify OrbitControls settings
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.screenSpacePanning = true;
+        controls.minDistance = 2;
+        controls.maxDistance = 10;
+        controls.target.set(0, 0, 0);
+
+        // Disable all zoom/pan/rotation controls
+        controls.enableZoom = false; 
+        
+        let model;
+        
+        // Load GLB model
+        const loader = new THREE.GLTFLoader();
+        loader.load(
+            'assets/bustted.glb',
+            function (gltf) {
+                model = gltf.scene;
+                model.scale.set(2, 2, 2);
+                model.position.set(-2, 0, 0);
+                
+                // Center the model
+                const box = new THREE.Box3().setFromObject(model);
+                const center = box.getCenter(new THREE.Vector3());
+                model.position.sub(center);
+                
+                // Add initial rotation to face forward
+                model.rotation.set(0, 0, 0);
+                
+                // Enable environment map on the model materials
+                model.traverse((child) => {
+                    if (child.isMesh) {
+                        child.material.envMapIntensity = 1;
+                    }
+                });
+                
+                scene.add(model);
+                
+                // Update controls target to origin
+                controls.target.set(0, 0, 0);
+                controls.update();
+                // Hide loading overlay when the model is loaded
+                document.getElementById('loading-overlay').style.display = 'none';
+            },
+            undefined,
+            function (error) {
+                console.error('An error occurred loading the model:', error);
+            }
+        );
+
+        // Add these variables after scene setup
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetX = 0;
+        let targetY = 0;
+        const windowHalfX = window.innerWidth / 2;
+        const windowHalfY = window.innerHeight / 2;
+        const movementRange = 0.5; // Adjust this value to control movement range (0.5 = 50% of max movement)
+
+        // Add mouse move event listener
+        document.addEventListener('mousemove', onDocumentMouseMove);
+
+        function onDocumentMouseMove(event) {
+            mouseX = (event.clientX - windowHalfX);
+            mouseY = (event.clientY - windowHalfY);
+        }
+
+        // Update the animate function
+        function animate() {
+            requestAnimationFrame(animate);
+
+            if (model) {
+                // Calculate target position with smooth interpolation
+                targetX = mouseX * 0.001; // Adjust multiplier to control sensitivity
+                targetY = mouseY * 0.001;
+
+                // Restrict movement range
+                targetX = Math.max(Math.min(targetX, movementRange), -movementRange);
+                targetY = Math.max(Math.min(targetY, movementRange), -movementRange);
+
+                // Smooth interpolation
+                model.rotation.y += (targetX - model.rotation.y) * 0.05;
+                model.rotation.x += (targetY - model.rotation.x) * 0.05;
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+    </script>
+    <!-- Add this right before </body> -->
+    <script>
+        // Handle smooth scrolling
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Handle section highlighting
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px', // Adjust these values to control when the highlight triggers
+            threshold: 0
+        };
+
+        const observerCallback = (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Remove active class from all nav links
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    
+                    // Add active class to the corresponding nav link
+                    const activeLink = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
 </body>
-</html>
+</html> 
