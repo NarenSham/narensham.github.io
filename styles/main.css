@@ -17,7 +17,8 @@ body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     line-height: 1.6;
     color: var(--primary-color);
-    background-color: var(--background-color);
+    background-color: var(--background-color); /* Fallback color */
+    background-color: #f0f0f0; /* Set a light grey fallback color */
 }
 
 .container {
@@ -314,6 +315,7 @@ section.active h2 {
     overflow: hidden;
     aspect-ratio: 21 / 9;
     margin: 0 20px !important;
+    background-color: #f0f0f0; /* Fallback color for the model container */
 }
 
 #model-container canvas {
@@ -341,4 +343,36 @@ section.active h2 {
 /* Remove the cursor effect */
 .dynamic-text::after {
     content: none; /* Remove the cursor */
+}
+
+#contact {
+    padding: 2rem 0;
+}
+
+#contact-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#contact-form input,
+#contact-form textarea {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+}
+
+#contact-form button {
+    padding: 0.75rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#contact-form button:hover {
+    opacity: 0.9;
 } 

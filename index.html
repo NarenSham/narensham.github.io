@@ -229,6 +229,9 @@
             },
             function (error) {
                 console.error('Error loading EXR file:', error);
+                // Set fallback background color or texture
+                document.body.style.backgroundColor = '#82C8E5'; // Fallback color
+                // Optionally, load a different texture here
             }
         );
 
