@@ -13,7 +13,7 @@
 }
 
 body {
-    padding-top: 70px; /* Adjust this value based on your nav height */
+    padding-top: 16px; /* Adjust this value based on your nav height */
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     line-height: 1.6;
     color: var(--primary-color);
@@ -23,7 +23,7 @@ body {
 .container {
     max-width: 1600px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 0px;
     width: 100%;
     box-sizing: border-box;
 }
@@ -43,7 +43,7 @@ nav .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 2rem;
+    padding: 1.85rem 2rem;
 }
 
 nav .logo a {
@@ -269,7 +269,7 @@ section.active h2 {
 
     #model-container {
         width: 100vw !important; /* Match viewport width */
-        height: 50vh !important; /* Set height to 40vh */
+        height: 40vh !important; /* Set height to 40vh */
         max-width: 100% !important;
         max-height: none !important; /* Remove any max-height constraints */
         aspect-ratio: 1 !important; /* Force 1:1 ratio */
@@ -286,7 +286,7 @@ section.active h2 {
     }
 
     .text-container {
-        min-height: 100px; /* Adjust for smaller text on mobile */
+        min-height: 140px; /* Adjust for smaller text on mobile */
     }
 
     .hero h2 {
