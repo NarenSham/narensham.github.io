@@ -63,35 +63,135 @@
             <section id="projects">
                 <h2>My projects</h2>
                 <div class="projects-grid">
-                    <!-- Project cards will go here -->
+                    <div class="project-square">
+                        <div class="project-inner">
+                            <div class="project-front">
+                                <img src="assets/fhir.png" alt="FHIR Query Translator Logo">
+                            </div>
+                            <div class="project-description">
+                                <p>A tool for translating FHIR queries.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-square">
+                        <div class="project-inner">
+                            <div class="project-front">
+                                <img src="assets/fc.png" alt="Fitness Class Logo">
+                            </div>
+                            <div class="project-description">
+                                <p>AI platform for gym coaching</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-square">
+                        <div class="project-inner">
+                            <div class="project-front">
+                                <img src="assets/sales_analytics.png" alt="Sales Analytics Logo">
+                            </div>
+                            <div class="project-description">
+                                <p>Analytics tool for sales data.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-square">
+                        <div class="project-inner">
+                            <div class="project-front">
+                                <img src="assets/focalpoint.webp" alt="FocalPoint by Deloitte Ventures Logo">
+                            </div>
+                            <div class="project-description">
+                                <p>Consulting Assessment Tool.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-square">
+                        <div class="project-inner">
+                            <div class="project-front">
+                                <img src="assets/querent.png" alt="Querent by Practo Logo">
+                            </div>
+                            <div class="project-description">
+                                <p>BI for care providers.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <section id="skills">
                 <h2>My Skills</h2>
                 <div class="skills-grid">
-                    <!-- Add your skills here -->
+                    <svg class="skills-connections"></svg>
+                    <!-- Skills items will be added here -->
                 </div>
             </section>
 
             <section id="experience">
-                <h2>My experience</h2>
-                <!-- Add your experience here -->
+                <h2>My Experience</h2>
+                <div class="experience-grid">
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <h3>Enablement Manager</h3>
+                            <div class="company">Molson Coors</div>
+                            <div class="duration">August 2023 - Present</div>
+                        </div>
+                        <p class="experience-description">
+                            Enablement leader for CPG platforms. Transforming the way we build and enhance internal platforms to ensure we are able to deliver value to our customers.
+                        </p>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <h3>Senior Consultant</h3>
+                            <div class="company">Deloitte Consulting</div>
+                            <div class="duration">January 2019 - July 2023</div>
+                        </div>
+                        <p class="experience-description">
+                            Management consultant for advisory and transformation projects. Worked on develping products and solutions for clients in the Retail and CPG industry.
+                        </p>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <h3>Software Engineer</h3>
+                            <div class="company">Various</div>
+                            <div class="duration">August 2012 - July 2017</div>
+                        </div>
+                        <p class="experience-description">
+                            Worked on building data pipelines and data products for across industries in the UK, India and the Middle East.
+                        </p>
+                    </div>
+                </div>
             </section>
 
-            <section id="education">
+            <section id="education" class="education-section">
                 <h2>My Education</h2>
-                <!-- Add your education here -->
+                <div class="education-grid">
+                    <div class="education-item">
+                        <div class="education-logo">
+                            <img src="assets/University_of_Cincinnati_Logo.jpeg" alt="UQ Logo">
+                        </div>
+                        <div class="education-details">
+                            <h3>The University of Cincinnati</h3>
+                            <div class="degree">Data Science and Artificial Intelligence</div>
+                            <div class="duration">Master of Information Systems</div>
+                        </div>
+                    </div>
+
+                    <div class="education-item">
+                        <div class="education-logo">
+                            <img src="assets/PESUniversity-logo.jpg" alt="Previous University Logo">
+                        </div>
+                        <div class="education-details">
+                            <h3>PES University</h3>
+                            <div class="degree">Electrical and Electronics Engineering</div>
+                            <div class="duration">Bachelor of Engineering</div>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <section id="contact">
                 <h2>Contact me</h2>
-                <p>Please contact me directly at [your-email] or through this form.</p>
-                <form class="contact-form">
-                    <input type="email" placeholder="Email" required>
-                    <textarea placeholder="Message" required></textarea>
-                    <button type="submit" class="button">Submit</button>
-                </form>
+                <p>I am currently looking to build. Early stage entrepreneurs are welcome to reach out. You can reach me at <a href="mailto:emailnarensham@gmail.com">emailnarensham@gmail.com</a></p>
             </section>
         </main>
     </div>
@@ -350,10 +450,12 @@
     <script>
         const roles = [
             "former Management Consultant",
-            "Data Expert",
-            "Supply Chain Specialist",
-            "Business Operations Expert",
-            "Problem Solver"
+            "Full Stack Developer",
+            "Product Manager",
+            "Freelancer",
+            "Supply Chain Planning Expert",
+            "BI Architect",
+            "Problem Solver",
         ];
 
         const dynamicText = document.querySelector('.dynamic-text');
@@ -394,5 +496,14 @@
         // Start the typing animation
         typeText();
     </script>
+    <!-- Add this before closing body tag -->
+    <script src="scripts/projects.js"></script>
+    <!-- Add before closing body tag -->
+    <script src="scripts/skills.js"></script>
+    <footer>
+        <p style="text-align: center; font-size: 0.8rem; margin-top: 2rem;">
+            Made with ❤️ by Naren
+        </p>
+    </footer>
 </body>
 </html> 
