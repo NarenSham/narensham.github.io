@@ -1,19 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
     const skills = [
-        { name: 'Rust', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Rust_programming_language_black_logo.svg/1200px-Rust_programming_language_black_logo.svg.png' },
-        { name: 'PHP', img: 'https://www.php.net/images/logos/new-php-logo.svg' },
-        { name: 'Tableau', img: 'https://www.tableau.com/sites/default/files/2021-01/Tableau_Logo_Blue.svg' },
-        { name: 'React', img: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg' },
-        { name: 'Go', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Go-logo-blue.svg/1200px-Go-logo-blue.svg.png' },
-        { name: 'Node.js', img: 'https://nodejs.org/static/images/logo.svg' },
         { name: 'Python', img: 'https://www.python.org/static/community_logos/python-logo-generic.svg' },
-        { name: 'HTML', img: 'https://www.w3.org/html/logo/downloads/HTML5_Logo.svg' },
-        { name: 'Git', img: 'https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png' },
-        { name: 'MongoDB', img: 'https://www.mongodb.com/assets/images/press/logo/MongoDB_Logo_FullColorBlack_RGB.png' },
+        { name: 'SQL', img: 'https://www.svgrepo.com/show/331760/sql-database-generic.svg' },
+        { name: 'Pandas', img: 'https://pandas.pydata.org/static/img/pandas_mark.svg' },
+        { name: 'NumPy', img: 'https://numpy.org/images/logo.svg' },
+        { name: 'dbt', img: 'https://seeklogo.com/images/D/dbt-logo-500AB0BAA7-seeklogo.com.png' },
+        { name: 'Airflow', img: 'https://upload.wikimedia.org/wikipedia/commons/d/de/AirflowLogo.png' },
+        { name: 'Prefect', img: 'https://docs.prefect.io/img/logos/prefect-logo-mark-gradient.png' },
+        { name: 'Tableau', img: 'https://logos-world.net/wp-content/uploads/2021/10/Tableau-Logo.png' },
+        { name: 'React', img: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg' },
+        { name: 'Flask', img: 'https://flask.palletsprojects.com/en/2.3.x/_images/flask-logo.png' },
+        { name: 'Streamlit', img: 'https://streamlit.io/images/brand/streamlit-mark-color.png' },
         { name: 'PostgreSQL', img: 'https://www.postgresql.org/media/img/about/press/elephant.png' },
-        { name: 'Linux', img: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg' },
+        { name: 'Snowflake', img: 'https://companieslogo.com/img/orig/SNOW-35164165.png' },
+        { name: 'GCP', img: 'https://static-00.iconduck.com/assets.00/google-cloud-icon-512x412-8rnz6wkz.png' },
         { name: 'AWS', img: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg' },
-        { name: 'Docker', img: 'https://www.docker.com/wp-content/uploads/2022/03/vertical-logo-monochromatic.png' }
+        { name: 'Docker', img: 'https://www.docker.com/wp-content/uploads/2022/03/vertical-logo-monochromatic.png' },
+        { name: 'Git', img: 'https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png' },
+        { name: 'Linux', img: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg' }
     ];
 
     const skillsGrid = document.querySelector('.skills-grid');
@@ -153,4 +157,4 @@ document.addEventListener('DOMContentLoaded', () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(updateConnections, 100);
     });
-}); 
+});

@@ -150,10 +150,10 @@ nav a:hover {
 /* Projects Grid */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(3, minmax(200px, 300px));
     gap: 2rem;
     margin: 2rem 0;
-    justify-items: center;
+    justify-content: center;
     align-items: center;
 }
 
@@ -168,8 +168,8 @@ nav a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 200px;
-    width: 200px;
+    height: 250px;
+    width: 100%;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -197,6 +197,7 @@ nav a:hover {
     height: 100%;
     backface-visibility: hidden;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: white;
@@ -210,6 +211,28 @@ nav a:hover {
 .project-description {
     transform: rotateY(180deg);
     color: black;
+}
+
+.project-description p {
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.project-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: white !important;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: opacity 0.3s;
+    margin-top: 0.5rem;
+}
+
+.project-link:hover {
+    opacity: 0.8;
 }
 
 /* Desktop hover effect */
@@ -234,75 +257,203 @@ nav a:hover {
     margin: auto;
 }
 
-/* Skills Grid */
-.skills-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
+/* Skills Section - Metro/Zune UI Style */
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
     margin: 2rem 0;
-    position: relative;
-    min-height: 600px;
+    max-width: 1400px;
 }
 
-.skill-item {
-    background-color: white;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
-    border: 1px solid var(--border-color);
-    position: absolute;
-    cursor: pointer;
+.skills-category {
+    background: white;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skills-category:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+}
+
+.skills-category h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+    padding: 1.25rem 1.5rem;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Metro color scheme - vibrant and bold */
+.skills-category:nth-child(1) h3 {
+    background: #0078D4; /* Microsoft Blue */
+}
+
+.skills-category:nth-child(2) h3 {
+    background: #00B294; /* Teal */
+}
+
+.skills-category:nth-child(3) h3 {
+    background: #8764B8; /* Purple */
+}
+
+.skills-category:nth-child(4) h3 {
+    background: #E74856; /* Red */
+}
+
+.skills-grid-squares {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    padding: 0;
+}
+
+.skill-square {
+    background: white;
     padding: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    animation: float 6s ease-in-out infinite;
-    animation-delay: calc(var(--delay) * -1s);
-}
-
-.skill-item:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 2;
-    animation-play-state: paused;
-}
-
-.skill-item img {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-    transition: all 0.3s ease;
-}
-
-.skill-item span {
-    font-size: 0.8rem;
+    text-align: center;
+    border-radius: 0;
+    font-size: 0.9rem;
     font-weight: 500;
     color: var(--primary-color);
-    text-align: center;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    border: 1px solid #e8e8e8;
+    border-left: none;
+    border-top: none;
+    position: relative;
+    overflow: hidden;
 }
 
-.skills-connections {
+/* Remove borders on edges */
+.skill-square:nth-child(3n) {
+    border-right: none;
+}
+
+.skill-square:nth-child(n+4) {
+    border-bottom: none;
+}
+
+.skill-square::before {
+    content: '';
     position: absolute;
     top: 0;
-    left: 0;
+    left: -100%;
     width: 100%;
     height: 100%;
-    pointer-events: none;
-    z-index: 1;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
 }
 
-.skills-connections path {
-    stroke: #e1e1e1;
-    stroke-width: 1;
-    fill: none;
-    opacity: 0.5;
-    transition: all 0.3s ease;
+.skill-square:hover::before {
+    left: 100%;
+}
+
+.skill-square:hover {
+    color: white;
+    transform: scale(1.05);
+    z-index: 10;
+    border-color: transparent;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Category-specific hover colors matching headers */
+.skills-category:nth-child(1) .skill-square:hover {
+    background: #0078D4;
+}
+
+.skills-category:nth-child(2) .skill-square:hover {
+    background: #00B294;
+}
+
+.skills-category:nth-child(3) .skill-square:hover {
+    background: #8764B8;
+}
+
+.skills-category:nth-child(4) .skill-square:hover {
+    background: #E74856;
+}
+
+/* Add subtle animation */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.skills-category {
+    animation: slideIn 0.5s ease-out forwards;
+}
+
+.skills-category:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.skills-category:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.skills-category:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.skills-category:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+/* Experience Section Updates */
+.experience-description {
+    margin-top: 1rem;
+}
+
+.experience-description > p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.project-highlights {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.project-highlights li {
+    position: relative;
+    padding: 0.75rem 0 0.75rem 1.5rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    color: var(--secondary-color);
+}
+
+.project-highlights li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.project-highlights strong {
+    color: var(--primary-color);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.25rem;
 }
 
 /* Experience Timeline */
@@ -553,30 +704,35 @@ nav a:hover {
     }
 
     .projects-grid {
-        grid-template-columns: repeat(2, 1fr); /* Fit 2 squares in each row */
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     .project-square {
-        height: 150px; /* Adjust height for mobile */
-        width: 150px; /* Adjust width for mobile */
+        height: 200px;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
     }
 
-    .skills-grid {
-        min-height: 400px;
+    .skills-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
-    .skill-item {
-        width: 90px;
-        height: 90px;
+    .skills-category h3 {
+        padding: 1rem 1.25rem;
+        font-size: 1rem;
     }
 
-    .skill-item img {
-        width: 30px;
-        height: 30px;
+    .skills-grid-squares {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0;
     }
 
-    .skill-item span {
-        font-size: 0.7rem;
+    .skill-square {
+        padding: 0.85rem 0.5rem;
+        font-size: 0.85rem;
     }
 
     .experience-grid {
@@ -818,4 +974,4 @@ footer p {
     color: var(--secondary-color);
     font-size: 0.8rem; /* Smaller font size for footer */
     font-weight: 500; /* Optional: make it slightly bolder */
-} 
+}
